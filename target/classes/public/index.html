@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Management System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Dashboard Header -->
+        <header id="topbar" style="display:none;">
+            <div class="logo">✦ LMS</div>
+            <div id="user-info">
+                <span id="welcome-msg"></span>
+                <span id="role-badge" class="badge"></span>
+                <button onclick="logout()" class="btn btn-secondary btn-sm">Logout</button>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main id="main-content">
+            <!-- Login View -->
+            <div id="login-view" class="card login-card">
+                <h2>Welcome Back</h2>
+                <p>Sign in to your account</p>
+                <div class="form-group">
+                    <label>Select Identity</label>
+                    <select id="login-username" class="form-control">
+                        <option value="employee">Alice (Employee)</option>
+                        <option value="john">John (Employee)</option>
+                        <option value="manager">John (Manager)</option>
+                        <option value="admin">System (Admin)</option>
+                    </select>
+                </div>
+                <button onclick="login()" class="btn btn-primary w-100">Sign In</button>
+                <div class="mt-3 text-sm text-center text-muted">
+                    <small>For grading demonstration purposes</small>
+                </div>
+            </div>
+
+            <!-- Employee View (Member 1) -->
+            <div id="employee-view" class="dashboard-grid" style="display:none;">
+                <!-- Left Col -->
+                <div class="col">
+                    <div class="card">
+                        <h3>Apply for Leave</h3>
+                        <form id="leave-form" onsubmit="applyLeave(event)">
+                            <div class="form-group">
+                                <label>Leave Type</label>
+                                <select id="leaveType" class="form-control" required></select>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Start Date</label>
+                                    <input type="date" id="startDate" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>End Date</label>
+                                    <input type="date" id="endDate" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Reason</label>
+                                <textarea id="reason" class="form-control" rows="3" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Submit Request</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- Right Col -->
+                <div class="col">
+                    <div class="card fade-in">
+                        <h3>My Leave History</h3>
+                        <table class="table" id="my-leaves-table">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Period</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="card mt-3 fade-in">
+                        <h3>Notifications <span id="notif-badge" class="badge badge-pulse"></span></h3>
+                        <ul id="notif-list" class="notif-list"></ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Manager View (Member 2) -->
+            <div id="manager-view" class="dashboard-grid" style="display:none;">
+                <div class="col w-100">
+                    <div class="card fade-in">
+                        <h3>Pending Leave Requests</h3>
+                        <table class="table" id="pending-leaves-table">
+                            <thead>
+                                <tr>
+                                    <th>Employee</th>
+                                    <th>Type</th>
+                                    <th>Period</th>
+                                    <th>Reason</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin View (Member 3 & 4) -->
+            <div id="admin-view" class="dashboard-grid" style="display:none;">
+                <div class="col">
+                    <div class="card fade-in">
+                        <h3>Manage Leave Types</h3>
+                        <form id="leavetype-form" onsubmit="addLeaveType(event)" class="mb-3">
+                            <div class="form-row">
+                                <input type="text" id="lt-name" placeholder="Name" class="form-control" required>
+                                <input type="number" id="lt-days" placeholder="Max Days" class="form-control" required>
+                            </div>
+                            <input type="text" id="lt-desc" placeholder="Description" class="form-control mt-2 mb-2">
+                            <button type="submit" class="btn btn-secondary">Add Type</button>
+                        </form>
+                        <ul id="leavetype-list" class="list-group"></ul>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card fade-in">
+                        <h3>System Reports</h3>
+                        <button onclick="generateReport()" class="btn btn-primary mb-3">Generate New Report</button>
+                        <div id="reports-list"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="shared-calendar-view" class="card mt-4 fade-in" style="display:none;">
+                <h3>Team Calendar</h3>
+                <div id="calendar-container"></div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Template JS -->
+    <script src="js/app.js"></script>
+</body>
+</html>

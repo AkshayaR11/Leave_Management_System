@@ -1,0 +1,242 @@
+/* Premium Vanilla CSS Architecture */
+:root {
+    --primary: #6366f1;
+    --primary-hover: #4f46e5;
+    --bg-color: #0f172a;
+    --card-bg: rgba(30, 41, 59, 0.7);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --border-color: rgba(255, 255, 255, 0.1);
+    
+    --success: #10b981;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    background-image: radial-gradient(circle at top right, #1e1b4b 0%, transparent 40%),
+                      radial-gradient(circle at bottom left, #0f172a 0%, transparent 40%);
+    background-attachment: fixed;
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#app {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    width: 100%;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: var(--card-bg);
+    border-radius: 12px;
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 1.5rem;
+    background: linear-gradient(135deg, #a855f7, #6366f1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Cards (Glassmorphism) */
+.card {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+}
+
+.login-card {
+    max-width: 400px;
+    margin: 4rem auto;
+    text-align: center;
+}
+
+.login-card p {
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+}
+
+/* Forms */
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.form-row .form-group { flex: 1; }
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-main);
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+/* Buttons */
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 1rem;
+}
+
+.btn-sm { padding: 0.5rem 1rem; font-size: 0.875rem; }
+.w-100 { width: 100%; }
+.mt-3 { margin-top: 1rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+}
+.btn-primary:hover { background: var(--primary-hover); transform: translateY(-1px); }
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-main);
+}
+.btn-secondary:hover { background: rgba(255, 255, 255, 0.15); }
+
+.btn-success { background: rgba(16, 185, 129, 0.15); color: var(--success); }
+.btn-danger { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+
+/* Layouts */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+.dashboard-grid .w-100 {
+    grid-column: span 2;
+}
+
+/* Tables */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+.table th, .table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+.table th { color: var(--text-muted); font-size: 0.875rem; font-weight: 600; }
+
+/* Badges */
+.badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 99px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+.badge-PENDING { background: rgba(245, 158, 11, 0.2); color: var(--warning); }
+.badge-APPROVED { background: rgba(16, 185, 129, 0.2); color: var(--success); }
+.badge-REJECTED, .badge-CANCELLED { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
+
+/* Animation */
+.fade-in { animation: fadeIn 0.4s ease-in-out; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Utils */
+.notif-list, .list-group { list-style: none; }
+.notif-list li, .list-group li {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    background: rgba(255,255,255,0.02);
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+}
+.text-center { text-align: center; }
+
+/* Calendar Widget */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-top: 1rem;
+}
+.calendar-day-header {
+    text-align: center;
+    font-weight: 600;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    padding: 0.5rem 0;
+}
+.calendar-day {
+    background: rgba(255,255,255,0.05);
+    border-radius: 4px;
+    padding: 0.5rem;
+    min-height: 60px;
+    font-size: 0.75rem;
+    position: relative;
+}
+.leave-strip {
+    display: block;
+    border-radius: 2px;
+    padding: 2px 4px;
+    margin-top: 2px;
+    color: #fff;
+    font-size: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
